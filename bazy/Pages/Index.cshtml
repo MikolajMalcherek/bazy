@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<form method="get">
+    <div class="input-group">
+        <input class="form-control" asp-for="SearchTerm">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+
+<h1>Zawodnicy</h1>
+
+<div class="card-deck">
+    @foreach (var zawodnik in Model.zawodnicy)
+    {
+        <div>
+            <h2>@zawodnik.imie_zawodnika @zawodnik.nazwisko_zawodnika</h2>
+        </div>
+    }
+</div>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
