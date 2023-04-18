@@ -1,0 +1,44 @@
+﻿@page
+@model bazy.Pages.DodajZawodnikaModel
+
+@{
+    ViewData["Title"] = "Dodaj Zawodnika";
+}
+
+<h1>Wyswietlbaze</h1>
+
+<h4>Zawodnik</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Zawodnik.imie_zawodnika" class="control-label"></label>
+                <input asp-for="Zawodnik.imie_zawodnika" class="form-control" />
+                <span asp-validation-for="Zawodnik.imie_zawodnika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zawodnik.nazwisko_zawodnika" class="control-label"></label>
+                <input asp-for="Zawodnik.nazwisko_zawodnika" class="form-control" />
+                <span asp-validation-for="Zawodnik.nazwisko_zawodnika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zawodnik.kraj_pochodzenia" class="control-label"></label>
+                <input asp-for="Zawodnik.kraj_pochodzenia" class="form-control" />
+                <span asp-validation-for="Zawodnik.kraj_pochodzenia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

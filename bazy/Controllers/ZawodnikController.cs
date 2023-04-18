@@ -5,6 +5,8 @@ using bazy.Models;
 using MySql.Data.MySqlClient;
 using System.Reflection.PortableExecutable;
 using Microsoft.Identity.Client;
+using bazy.Services;
+using bazy.Services.Interfaces;
 
 
 /*------------------------------------------------------------------------------------------------------------------*/
@@ -13,15 +15,15 @@ using Microsoft.Identity.Client;
 
 namespace bazy.Controllers
 {
-    [Route("api/zawodnik")]
+    [Route("api/Zawodnik")]
     [ApiController]
     public class ZawodnikController : ControllerBase
     {
-        private readonly ZawodnikDbContext _context;
+        private readonly IZawodnikService _zawodnikService;
 
-        public ZawodnikController(ZawodnikDbContext context)
+        public ZawodnikController(IZawodnikService service)
         {
-            this._context = context;
+            _zawodnikService = service;
         }
 
 
@@ -29,18 +31,11 @@ namespace bazy.Controllers
         // Aby móc to zrobić musimy mieć dostęp do kontekstu bazy danych 
         // Dodanie atrybutu HttpGet jest dobrym nawykiem nazywania akcj przez takie atrybuty
         // W tym przypadku atrybut ten zostałby nadany automatycznie ale i tak warto
-        [HttpGet]
-        public ActionResult<IEnumerable<Zawodnik>> GetAll()
+        [HttpGet("GetAll")]
+        public Task<IEnumerable<Zawodnik>> GetAll()
         {
-            var zawodnicy = _context
-                .Zawodnicy
-                .ToList();
-            return Ok(zawodnicy);
+            var zawodnicy = _zawodnikService.GetAll();
+            return zawodnicy;
         }
-
-
-
-
-
     }
 }

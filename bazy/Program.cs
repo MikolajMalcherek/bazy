@@ -2,24 +2,15 @@ using bazy.Controllers;
 using bazy.Data;
 using bazy;
 using Microsoft.EntityFrameworkCore;
+using bazy.Services.Interfaces;
+using bazy.Services;
+using bazy.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
-static WebApplication InitializeApp(string[] args)
-{
-    ZawodnikDbContext _dbContext = new ZawodnikDbContext();
-    ZawodnikSeeder seeder = new ZawodnikSeeder(_dbContext);
-    var builder = WebApplication.CreateBuilder(args);
-    ConfigureServices(builder);
-    builder.Services.AddControllers();
-    var app = builder.Build();
-    Configure(app, seeder);
-    return app;
-
-}
+builder.Services.AddEndpointsApiExplorer();
 
 
 
@@ -30,6 +21,10 @@ static void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddControllers();
     builder.Services.AddDbContext<ZawodnikDbContext>();
     builder.Services.AddScoped<ZawodnikController>();
+    builder.Services.AddScoped<IZawodnikService, ZawodnikService>();
+    builder.Services.AddScoped<HttpClient>();
+    builder.Services.AddHttpClient<IZawodnikService, ZawodnikService>(c =>
+    c.BaseAddress = new Uri("https://localhost:7163/"));
     // rejestrujemy jeszcze serwis seedujacy
     builder.Services.AddScoped<ZawodnikSeeder>();
 }
@@ -72,5 +67,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+LocationEndpointsConfig.AddEndpoints(app);
 
 app.Run();

@@ -16,3 +16,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+body {
+    background-image: url('/img/tlo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body {
+    color: white;
+}
+
+
+.table {
+    color: white;
+}

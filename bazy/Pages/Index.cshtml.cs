@@ -11,11 +11,6 @@ namespace bazy.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-
-        IZawodnikService zawodnikService;
-
-        public IEnumerable<Zawodnik> zawodnicy { get; set; }
-
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
@@ -26,9 +21,9 @@ namespace bazy.Pages
 
         public void OnGet()
         {
-            ZawodnikDbContext zawodnikDbContext = new ZawodnikDbContext();
-            zawodnikService = new IZawodnikService(zawodnikDbContext);
-            zawodnicy = zawodnikService.Search(SearchTerm);
+            //ZawodnikDbContext zawodnikDbContext = new ZawodnikDbContext();
+            //zawodnikService = new IZawodnikService(zawodnikDbContext);
+            //zawodnicy = zawodnikService.Search(SearchTerm);
         }
     }
 }
